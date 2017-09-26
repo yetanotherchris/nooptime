@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="Marten" Version="2.3.0" />
   </ItemGroup>
 
 </Project>
