@@ -8,6 +8,7 @@ namespace NoopTime.Tests
 	public class DockerHelper
 	{
 		private readonly DockerClient _dockerClient;
+		private string _containerId;
 
 		public DockerHelper()
 		{
@@ -43,7 +44,8 @@ namespace NoopTime.Tests
 			});
 
 			var createresult = _dockerClient.Containers.CreateContainerAsync(parameters).Result;
-			_dockerClient.Containers.StartContainerAsync(createresult.ID, new ContainerStartParameters());
+			_containerId = createresult.ID;
+			_dockerClient.Containers.StartContainerAsync(_containerId, new ContainerStartParameters());
 		}
 
 		public void RemovePostgresContainer()
@@ -62,6 +64,11 @@ namespace NoopTime.Tests
 					_dockerClient.Containers.RemoveContainerAsync(item.ID, new ContainerRemoveParameters() { Force = true }).Wait();
 				}
 			}
+		}
+
+		public void StopPostgres()
+		{
+			_dockerClient.Containers.StopContainerAsync(_containerId, new ContainerStopParameters());
 		}
 	}
 }

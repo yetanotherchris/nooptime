@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Threading;
 using Marten;
 using Nooptime.Domain.Models;
 using Nooptime.Domain.Repositories;
@@ -9,64 +6,35 @@ using Xunit;
 
 namespace NoopTime.Tests
 {
-	public class DatabaseFixture : IDisposable
+	public class UptimeCheckServiceTests : IClassFixture<PostgresDockerFixture>
 	{
-		private DockerHelper _dockerHelper;
-
-		public DatabaseFixture()
-		{
-			_dockerHelper = new DockerHelper();
-			_dockerHelper.RemovePostgresContainer();
-			_dockerHelper.StartPostgres();
-			Thread.Sleep(10000);
-		}
-
-		public void Dispose()
-		{
-		}
-	}
-
-	public class UptimeCheckServiceTests : IClassFixture<DatabaseFixture>
-	{
-		private const string ConnectionString = "database=nooptime;server=localhost;port=7878;uid=nooptime;pwd=nooptime;";
-
-		public UptimeCheckServiceTests(DatabaseFixture fixture)
-		{
-		}
-
 		[Fact]
-		public async void Test1()
+		public async void save_should_persist_instance()
 		{
-			var store = DocumentStore.For(options =>
-			{
-				options.CreateDatabasesForTenants(c =>
-				{
-					c.MaintenanceDatabase(ConnectionString);
-					c.ForTenant()
-						.CheckAgainstPgDatabase()
-						.WithOwner("nooptime")
-						.WithEncoding("UTF-8")
-						.ConnectionLimit(-1)
-						.OnDatabaseCreated(_ =>
-						{
-							Console.WriteLine("Database created");
-						});
-				});
-
-				options.Connection(ConnectionString);
-				options.Schema.For<UptimeCheckData>().Index(x => x.Id);
-			});
+			// given
+			DocumentStore documentStore = MartenHelper.CreateDocumentStore();
 
 			var id = Guid.NewGuid();
-			var repository = new UptimeCheckRepository(store);
-			repository.Save(new UptimeCheckData()
+			var repository = new UptimeCheckRepository(documentStore);
+			var uptimeCheckData = new UptimeCheckData()
 			{
 				Id = id,
-				Name = "My name"
-			});
+				Name = "My name",
+				Description = "My description",
+				Interval = TimeSpan.FromHours(1)
+			};
 
+			// when
+			repository.Save(uptimeCheckData);
+
+			// then
 			var loadedItem = await repository.Load(id);
-			Console.WriteLine(loadedItem.Name);
+
+			Assert.NotNull(loadedItem);
+			Assert.Equal(id, loadedItem.Id);
+			Assert.Equal(uptimeCheckData.Name, loadedItem.Name);
+			Assert.Equal(uptimeCheckData.Description, loadedItem.Description);
+			Assert.Equal(uptimeCheckData.Interval, loadedItem.Interval);
 		}
 	}
 }
