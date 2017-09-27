@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 
-namespace NoopTime.Tests
+namespace Nooptime.Tests.Helpers
 {
 	public class DockerHelper
 	{
 		private readonly DockerClient _dockerClient;
 		private string _containerId;
+		private IList<ContainerListResponse> _list;
 
 		public DockerHelper()
 		{
@@ -16,7 +18,17 @@ namespace NoopTime.Tests
 				.CreateClient();
 		}
 
-		public void StartPostgres()
+		public bool HasContainer()
+		{
+			if (_list == null)
+			{
+				_list = ListContainers();
+			}
+
+			return _list.Any();
+		}
+
+		public void CreateContainer()
 		{
 			var config = new Config();
 			var parameters = new CreateContainerParameters(config);
@@ -45,17 +57,16 @@ namespace NoopTime.Tests
 
 			var createresult = _dockerClient.Containers.CreateContainerAsync(parameters).Result;
 			_containerId = createresult.ID;
+		}
+
+		public void StartContainer()
+		{
 			_dockerClient.Containers.StartContainerAsync(_containerId, new ContainerStartParameters());
 		}
 
 		public void RemovePostgresContainer()
 		{
-			var listParameters = new ContainersListParameters();
-			listParameters.All = true;
-			listParameters.Filters = new Dictionary<string, IDictionary<string, bool>>();
-			listParameters.Filters.Add("name", new Dictionary<string, bool>() { { "nooptime-postgres", true } });
-
-			var list = _dockerClient.Containers.ListContainersAsync(listParameters).Result;
+			IList<ContainerListResponse> list = ListContainers();
 
 			if (list.Count > 0)
 			{
@@ -66,9 +77,20 @@ namespace NoopTime.Tests
 			}
 		}
 
+		private IList<ContainerListResponse> ListContainers()
+		{
+			var listParameters = new ContainersListParameters();
+			listParameters.All = false;
+			listParameters.Filters = new Dictionary<string, IDictionary<string, bool>>();
+			listParameters.Filters.Add("name", new Dictionary<string, bool>() { { "nooptime-postgres", true } });
+
+			var list = _dockerClient.Containers.ListContainersAsync(listParameters).Result;
+			return list;
+		}
+
 		public void StopPostgres()
 		{
-			_dockerClient.Containers.StopContainerAsync(_containerId, new ContainerStopParameters());
+			//_dockerClient.Containers.StopContainerAsync(_containerId, new ContainerStopParameters());
 		}
 	}
 }

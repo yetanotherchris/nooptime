@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Marten;
+using Marten.Util;
 using Nooptime.Domain.Models;
 
 namespace Nooptime.Domain.Repositories
@@ -14,9 +17,12 @@ namespace Nooptime.Domain.Repositories
 			_store = store;
 		}
 
-		public Task<UptimeCheckData[]> List()
+		public async Task<IEnumerable<UptimeCheckData>> List()
 		{
-			return null;
+			using (IDocumentSession session = _store.LightweightSession())
+			{
+				return await session.Query<UptimeCheckData>().ToListAsync();
+			}
 		}
 
 		public async Task<UptimeCheckData> Load(Guid id)
@@ -36,8 +42,26 @@ namespace Nooptime.Domain.Repositories
 			}
 		}
 
-		public void Delete(Guid id)
+		public async Task Delete(Guid id)
 		{
+			var item = await Load(id);
+			if (item != null)
+			{
+				using (IDocumentSession session = _store.LightweightSession())
+				{
+					session.Delete(item);
+					session.SaveChanges();
+				}
+			}
+		}
+
+		internal void ClearDatabase()
+		{
+			using (IDocumentSession session = _store.LightweightSession())
+			{
+				session.DeleteWhere<UptimeCheckData>(x => true);
+				session.SaveChanges();
+			}
 		}
 	}
 }

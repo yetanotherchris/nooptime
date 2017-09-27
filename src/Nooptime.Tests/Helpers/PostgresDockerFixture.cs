@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace NoopTime.Tests
+namespace Nooptime.Tests.Helpers
 {
 	public class PostgresDockerFixture : IDisposable
 	{
@@ -10,17 +10,23 @@ namespace NoopTime.Tests
 		public PostgresDockerFixture()
 		{
 			_dockerHelper = new DockerHelper();
-			_dockerHelper.RemovePostgresContainer();
-			_dockerHelper.StartPostgres();
 
-			// Wait for postgres to start
-			Console.WriteLine("Waiting 15 seconds for postgres to start...");
-			Thread.Sleep(15000);
+			if (!_dockerHelper.HasContainer())
+			{
+				// Remove any stale nooptime instance
+				_dockerHelper.RemovePostgresContainer();
+
+				_dockerHelper.CreateContainer();
+				_dockerHelper.StartContainer();
+
+				Console.WriteLine("Waiting for postgres to start...");
+				Thread.Sleep(15000);
+			}
 		}
 
 		public void Dispose()
 		{
-			_dockerHelper.StopPostgres();
+			//_dockerHelper.StopPostgres();
 		}
 	}
 }

@@ -2,14 +2,14 @@ using System;
 using Marten;
 using Nooptime.Domain.Models;
 
-namespace NoopTime.Tests
+namespace Nooptime.Tests.Helpers
 {
 	public class MartenHelper
 	{
 		private static DocumentStore _documentStore;
 		private const string ConnectionString = "database=nooptime;server=localhost;port=7878;uid=nooptime;pwd=nooptime;";
 
-		public static DocumentStore CreateDocumentStore()
+		public static DocumentStore GetDocumentStore()
 		{
 			if (_documentStore == null)
 			{
