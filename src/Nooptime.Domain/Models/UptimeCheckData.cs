@@ -10,5 +10,10 @@ namespace Nooptime.Domain.Models
 		public string Description { get; set; }
 		public TimeSpan Interval { get; set; }
 		public Dictionary<string, string> Properties { get; set; }
+
+		public UptimeCheckData()
+		{
+			Properties = new Dictionary<string, string>();
+		}
 	}
 }

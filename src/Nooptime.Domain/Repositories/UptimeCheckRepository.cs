@@ -33,11 +33,20 @@ namespace Nooptime.Domain.Repositories
 			}
 		}
 
-		public void Save(UptimeCheckData uptimeCheckData)
+		public void Insert(UptimeCheckData uptimeCheckData)
 		{
 			using (IDocumentSession session = _store.LightweightSession())
 			{
-				session.Store(uptimeCheckData);
+				session.Insert(uptimeCheckData);
+				session.SaveChanges();
+			}
+		}
+
+		public void Update(UptimeCheckData uptimeCheckData)
+		{
+			using (IDocumentSession session = _store.LightweightSession())
+			{
+				session.Update(uptimeCheckData);
 				session.SaveChanges();
 			}
 		}

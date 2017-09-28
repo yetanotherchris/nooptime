@@ -12,7 +12,9 @@ namespace Nooptime.Domain.Repositories
 
 		Task<UptimeCheckData> Load(Guid id);
 
-		void Save(UptimeCheckData uptimeCheckData);
+		void Insert(UptimeCheckData uptimeCheckData);
+
+		void Update(UptimeCheckData uptimeCheckData);
 
 		Task Delete(Guid id);
 	}
