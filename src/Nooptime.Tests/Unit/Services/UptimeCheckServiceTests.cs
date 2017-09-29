@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using Nooptime.Domain.Models;
@@ -26,7 +27,6 @@ namespace Nooptime.Tests.Unit.Services
 			// given
 			var data = new UptimeCheckData()
 			{
-				Id = Guid.NewGuid(),
 				Name = "Nom",
 				Description = "Nomnom",
 				Interval = TimeSpan.FromHours(1),
@@ -34,9 +34,10 @@ namespace Nooptime.Tests.Unit.Services
 			};
 
 			// when
-			_checkService.Create(data);
+			Guid id = _checkService.Create(data);
 
 			// then
+			Assert.NotEqual(id, Guid.Empty);
 			_repositoryMock.Verify(x => x.Insert(data));
 		}
 
@@ -96,6 +97,31 @@ namespace Nooptime.Tests.Unit.Services
 
 			// then
 			Assert.Equal(data, actualData);
+		}
+
+		[Fact]
+		public async void loadall_should_use_repository()
+		{
+			// given
+			var data = new UptimeCheckData()
+			{
+				Id = Guid.NewGuid(),
+				Name = "Nom",
+				Description = "Nomnom",
+				Interval = TimeSpan.FromHours(1),
+				Properties = new Dictionary<string, string>() { { "key", "value" } }
+			};
+
+			var list = new List<UptimeCheckData>() { data };
+
+			_repositoryMock.Setup(x => x.List())
+				.Returns(Task.Run(() => list.AsEnumerable()));
+
+			// when
+			var actualDataList = await _checkService.LoadAll();
+
+			// then
+			Assert.Equal(1, actualDataList.Count());
 		}
 	}
 }
