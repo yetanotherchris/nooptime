@@ -8,7 +8,7 @@ using Nooptime.Domain.Repositories;
 using Nooptime.Domain.Services;
 using Xunit;
 
-namespace Nooptime.Tests.Unit.Services
+namespace Nooptime.Tests.Unit.Domain.Services
 {
 	public class UptimeCheckServiceTests
 	{

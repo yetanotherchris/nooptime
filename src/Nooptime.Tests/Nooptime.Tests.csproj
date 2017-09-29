@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nooptime.Domain\Nooptime.Domain.csproj" />
+    <ProjectReference Include="..\Nooptime.Web\Nooptime.Web.csproj" />
   </ItemGroup>
 </Project>

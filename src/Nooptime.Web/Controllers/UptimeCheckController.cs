@@ -27,6 +27,7 @@ namespace Nooptime.Web.Controllers
 		{
 			Guid id = _uptimeCheckService.Create(new UptimeCheckData()
 			{
+				Id = Guid.Empty,
 				Name = model.Name,
 				Description = model.Description,
 				Interval = model.Interval,
@@ -40,8 +41,12 @@ namespace Nooptime.Web.Controllers
 		[Route("Patch")]
 		public void Patch([FromBody] UptimeCheckDataModel model)
 		{
+			if (model.Id == null)
+				throw new ArgumentNullException("Id");
+
 			_uptimeCheckService.Update(new UptimeCheckData()
 			{
+				Id = model.Id.Value,
 				Name = model.Name,
 				Description = model.Description,
 				Interval = model.Interval,
