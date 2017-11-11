@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nooptime.Domain.Models;
 using Nooptime.Domain.Services;
@@ -42,7 +40,7 @@ namespace Nooptime.Web.Controllers
         public void Patch([FromBody] UptimeCheckDataModel model)
 		{
 			if (model.Id == null)
-				throw new ArgumentNullException("Id");
+				throw new ArgumentNullException(nameof(model));
 
 			_uptimeCheckService.Update(new UptimeCheckData()
 			{

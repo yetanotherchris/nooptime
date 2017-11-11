@@ -1,23 +1,38 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
 
-<div class="row">
+<div class="row" style="margin-top: 40px;">
     <div class="col-xs-12" id="vue-instance">
-        <ul>
-            <li v-for="(index, item) in items" 
-                v-bind:index="index"
-                v-bind:key="item.Id">
-                {{ item.Id }}. {{ item.Name }} - ${{ item.Description }} <a v-on:click="remove(item, index)">Remove</a>
-            </li>
-        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(index, item) in items" v-bind:index="index" v-bind:key="item.Id">
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td><input class="btn btn-danger" type="button" v-on:click="remove(item, index)" value="Remove" /> <input class="btn btn-info" type="button" v-on:click="remove(item, index)" value="Edit" /></td>
+                </tr>
+            </tbody>
 
-        <h3>Add an item</h3>
-        <input type="text" id="name" placeholder="Name" required />
-        <input type="text" id="description" placeholder="Description" required  />
-        <input type="time" id="interval" placeholder="Interval" required  />
+        </table>
 
-        <button @@click="add" type="button">add</button>
+
+        <p>Add an item</p>
+        <form class="form form-inline">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Name" class="form-control" required />
+                <input type="text" id="description" placeholder="Description" class="form-control" required />
+                <input type="time" id="interval" placeholder="Interval" class="form-control" required />
+
+                <button @@click="add" type="button" class="btn btn-primary">add</button>
+            </div>
+        </form>
     </div>
 </div>
