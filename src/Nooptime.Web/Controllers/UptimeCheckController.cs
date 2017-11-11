@@ -22,23 +22,21 @@ namespace Nooptime.Web.Controllers
 		}
 
 		[HttpPost]
-		[Route("Post")]
-		public Guid Post([FromBody] UptimeCheckDataModel model)
+		public Guid Post(UptimeCheckDataModel model)
 		{
 			Guid id = _uptimeCheckService.Create(new UptimeCheckData()
 			{
 				Id = Guid.Empty,
-				Name = model.Name,
-				Description = model.Description,
-				Interval = model.Interval,
-				Properties = model.Properties
+				Name = model.Name ?? "",
+				Description = model.Description ?? "",
+				Interval = new TimeSpan(0, 1, 0, 0),
+				Properties = model.Properties ?? new Dictionary<string, string>()
 			});
 
 			return id;
 		}
 
 		[HttpPatch]
-		[Route("Patch")]
 		public void Patch([FromBody] UptimeCheckDataModel model)
 		{
 			if (model.Id == null)
