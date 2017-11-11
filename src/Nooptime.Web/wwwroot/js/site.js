@@ -22,15 +22,14 @@
                 methods: {
                     add: function () {
                         var that = this;
-
                         var model = {
+                            Id: "00000000-0000-0000-0000-000000000000",
                             Name: document.getElementById("name").value,
                             Description: document.getElementById("description").value,
-                            Interval: document.getElementById("interval").value,
-                            Properties: []
+                            Interval: document.getElementById("interval").value
                         };
 
-                        axios.post("/api/UptimeCheck", model)
+                        axios.post("/api/UptimeCheck/Post", model)
                             .then(function (response) {
                                 that.items.push(model);
                                 console.log(response);
@@ -40,20 +39,18 @@
                             });
                     },
 
-                    remove: function (index) {
+                    remove: function (item, index) {
                         var that = this;
-                        that.items.splice(index, 1);
-                        //var id = that.index;
 
-                        //axios.delete("/api/values/delete", id)
-                        //    .then(function(response) {
-                        //        that.items.splice(id);
-                        //        console.log(response);
-                        //    })
-                        //    .catch(function(error) {
-                        //        console.log(error);
+                        axios.delete("/api/UptimeCheck/Delete", item.id)
+                            .then(function (response) {
+                                that.items.splice(index, 1);
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
 
-                        //    });
+                            });
                     }
                 }
             });

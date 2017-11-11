@@ -22,22 +22,24 @@ namespace Nooptime.Web.Controllers
 		}
 
 		[HttpPost]
-		public Guid Post(UptimeCheckDataModel model)
+        [Route("Post")]
+		public Guid Post([FromBody]UptimeCheckDataModel model)
 		{
-			Guid id = _uptimeCheckService.Create(new UptimeCheckData()
-			{
-				Id = Guid.Empty,
-				Name = model.Name ?? "",
-				Description = model.Description ?? "",
-				Interval = new TimeSpan(0, 1, 0, 0),
-				Properties = model.Properties ?? new Dictionary<string, string>()
-			});
+            Guid id = _uptimeCheckService.Create(new UptimeCheckData()
+            {
+                Id = Guid.Empty,
+                Name = model.Name,
+                Description = model.Description,
+                Interval = model.Interval,
+                Properties = new Dictionary<string, string>()
+            });
 
-			return id;
+            return id;
 		}
 
 		[HttpPatch]
-		public void Patch([FromBody] UptimeCheckDataModel model)
+		[Route("Patch")]
+        public void Patch([FromBody] UptimeCheckDataModel model)
 		{
 			if (model.Id == null)
 				throw new ArgumentNullException("Id");
@@ -48,12 +50,12 @@ namespace Nooptime.Web.Controllers
 				Name = model.Name,
 				Description = model.Description,
 				Interval = model.Interval,
-				Properties = model.Properties
-			});
+				Properties = new Dictionary<string, string>()
+            });
 		}
 
 		[HttpDelete]
-		[Route("Delete")]
+        [Route("Delete")]
 		public void Delete(Guid id)
 		{
 			_uptimeCheckService.Delete(id);

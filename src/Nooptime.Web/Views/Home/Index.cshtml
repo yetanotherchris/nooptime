@@ -9,7 +9,7 @@
             <li v-for="(index, item) in items" 
                 v-bind:index="index"
                 v-bind:key="item.Id">
-                {{ item.Id }}. {{ item.Name }} - ${{ item.Description }} <a v-on:click="remove">Remove</a>
+                {{ item.Id }}. {{ item.Name }} - ${{ item.Description }} <a v-on:click="remove(item, index)">Remove</a>
             </li>
         </ul>
 
