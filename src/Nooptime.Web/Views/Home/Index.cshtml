@@ -17,7 +17,7 @@
                 <tr v-for="(index, item) in items" v-bind:index="index" v-bind:key="item.Id">
                     <td>{{item.name}}</td>
                     <td>{{item.description}}</td>
-                    <td><input class="btn btn-danger" type="button" v-on:click="remove(item, index)" value="Remove" /> <input class="btn btn-info" type="button" v-on:click="remove(item, index)" value="Edit" /></td>
+                    <td><input class="btn btn-danger" type="button" v-on:click="remove(item, index)" value="Remove" /> <input class="btn btn-info" type="button" v-on:click="edit(item, index)" value="Edit" /></td>
                 </tr>
             </tbody>
 
