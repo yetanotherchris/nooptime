@@ -42,7 +42,7 @@
                     remove: function (item, index) {
                         var that = this;
 
-                        axios.delete("/api/UptimeCheck/Delete", item.id)
+                        axios.delete("/api/UptimeCheck/Delete", { params: { id: item.id } })
                             .then(function (response) {
                                 that.items.splice(index, 1);
                                 console.log(response);
