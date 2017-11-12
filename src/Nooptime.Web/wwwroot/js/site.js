@@ -26,7 +26,7 @@
                     add: function () {
                         var that = this;
 
-                        if (document.getElementsByTagName("form")[0].checkValidity()) {
+                        if (document.getElementById("addForm").checkValidity()) {
                             var model = {
                                 Id: "00000000-0000-0000-0000-000000000000",
                                 Name: document.getElementById("name").value,
@@ -57,6 +57,28 @@
                                 console.log(error);
 
                             });
+                    },
+
+                    edit: function(item, index) {
+                        var that = this;
+
+                        if (document.getElementById("editForm").checkValidity()) {
+                            var model = {
+                                Id: "00000000-0000-0000-0000-000000000000",
+                                Name: document.getElementById("name").value,
+                                Description: document.getElementById("description").value,
+                                Interval: document.getElementById("interval").value
+                            };
+
+                            axios.post("/api/UptimeCheck/Patch", model)
+                                .then(function (response) {
+                                    that.items.push(model);
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }
                     }
                 }
             });
