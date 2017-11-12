@@ -4,7 +4,7 @@
 
 
 <div class="row" style="margin-top: 40px;">
-    <div class="col-xs-12" id="vue-instance">
+    <div class="col-xs-12" id="checks" v-if="items.length">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,8 +23,21 @@
 
         </table>
 
-
+    </div>
+    <div class="row-xs-12">
         <p>Add an item</p>
+        <form class="form form-inline">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Name" class="form-control" required />
+                <input type="text" id="description" placeholder="Description" class="form-control" required />
+                <input type="time" id="interval" placeholder="Interval" class="form-control" required />
+
+                <button @@click="add" type="submit" class="btn btn-primary">add</button>
+            </div>
+        </form>
+    </div>
+    <div class="row-xs-12 hidden">
+        <p>Edit item</p>
         <form class="form form-inline">
             <div class="form-group">
                 <input type="text" id="name" placeholder="Name" class="form-control" required />
