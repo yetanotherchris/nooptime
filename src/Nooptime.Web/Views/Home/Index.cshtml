@@ -15,8 +15,8 @@
             </thead>
             <tbody>
                 <tr v-for="(index, item) in items" v-bind:index="index" v-bind:key="item.Id">
-                    <td>{{item.name}}</td>
-                    <td>{{item.description}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Description}}</td>
                     <td><input class="btn btn-danger" type="button" v-on:click="remove(item, index)" value="Remove" /> <input class="btn btn-info" type="button" value="Edit" /></td>
                 </tr>
             </tbody>
@@ -30,19 +30,7 @@
                 <input type="text" id="description" placeholder="Description" class="form-control" required />
                 <input type="time" id="interval" placeholder="Interval" class="form-control" required />
 
-                <button @@click="add" type="submit" class="btn btn-primary">add</button>
-            </div>
-        </form>
-    </div>
-    <div class="row-xs-12 hidden">
-        <p>Edit item</p>
-        <form class="form form-inline" id="editForm">
-            <div class="form-group">
-                <input type="text" id="editName" placeholder="Name" class="form-control" required />
-                <input type="hidden" id="editId" required />
-                <input type="text" id="editDescription" placeholder="Description" class="form-control" required />
-                <input type="time" id="editInterval" placeholder="Interval" class="form-control" required />
-                <button @@click="edit" type="button" class="btn btn-primary">save</button>
+                <button @@click="add" type="button" class="btn btn-primary">add</button>
             </div>
         </form>
     </div>
