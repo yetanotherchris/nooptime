@@ -1,5 +1,14 @@
 ﻿document.addEventListener("DOMContentLoaded",
     function (event) {
+        Vue.config.devtools = true;
+
+        Vue.component('test', {
+            template: '<p>test</p>',
+            data: function () {
+
+            }
+        });
+
 
         var vm = new Vue(
             {
@@ -27,15 +36,20 @@
 
                         if (document.getElementById("addForm").checkValidity()) {
                             var model = {
-                                Id: "00000000-0000-0000-0000-000000000000",
+                                Id: document.getElementById("id").value,
                                 Name: document.getElementById("name").value,
                                 Description: document.getElementById("description").value,
                                 Interval: document.getElementById("interval").value
                             };
                             that.items.push(model);
+
+                            document.getElementById("id").value = "00000000-0000-0000-0000-000000000000";
+                            document.getElementById("name").value = "";
+                            document.getElementById("description").value = "";
+                            document.getElementById("interval").value = "";
                             //axios.post("/api/UptimeCheck/Post", model)
                             //    .then(function (response) {
-                                    
+
                             //        console.log(response);
                             //    })
                             //    .catch(function (error) {
