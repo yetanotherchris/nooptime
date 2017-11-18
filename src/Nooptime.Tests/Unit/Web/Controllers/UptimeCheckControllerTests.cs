@@ -43,7 +43,7 @@ namespace Nooptime.Tests.Unit.Web.Controllers
 				Name = data.Name,
 				Description = data.Description,
 				Interval = data.Interval,
-				Properties = data.Properties
+				//Properties = data.Properties
 			};
 
 			_checkServiceMock.Setup(x => x.Create(data)).Returns(expectedId);
@@ -75,7 +75,7 @@ namespace Nooptime.Tests.Unit.Web.Controllers
 				Name = data.Name,
 				Description = data.Description,
 				Interval = data.Interval,
-				Properties = data.Properties
+				//Properties = data.Properties
 			};
 
 			// when
