@@ -34,7 +34,7 @@ namespace Nooptime.Web
 
 		private IDocumentStore CreateDocumentStore()
 		{
-			const string ConnectionString = "database=nooptime;server=localhost;port=7878;uid=nooptime;pwd=nooptime;";
+			const string ConnectionString = "database=nooptime;server=localhost;port=5432;uid=nooptime;pwd=nooptime;";
 
 			var documentStore = DocumentStore.For(options =>
 				{

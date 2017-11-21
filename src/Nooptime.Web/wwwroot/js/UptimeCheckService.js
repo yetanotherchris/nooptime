@@ -1,0 +1,3 @@
+class UptimeCheckService {
+    getSummaryData(){}
+}

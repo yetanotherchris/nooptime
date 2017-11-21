@@ -25,7 +25,7 @@ namespace Nooptime.Web.Controllers
 		{
             Guid id = _uptimeCheckService.Create(new UptimeCheckData()
             {
-                Id = Guid.Empty,
+                Id = Guid.NewGuid(),
                 Name = model.Name,
                 Description = model.Description,
                 Interval = model.Interval,

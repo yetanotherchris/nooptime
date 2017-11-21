@@ -10,6 +10,7 @@
     "build": "cross-env NODE_ENV=development browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "vue": "^2.0.1"
   },
   "devDependencies": {
