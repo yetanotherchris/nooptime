@@ -21,7 +21,7 @@ The following are required to develop NoopTime:
 First, run Postgres in a docker container:
 
 ```
-docker run -d -p 5432:5432 --name nooptime-postgres -e POSTGRES_USERNAME=nooptime -e POSTGRES_PASSWORD=nooptime postgres
+docker run -d -p 5432:5432 --name nooptime-postgres -e POSTGRES_USER=nooptime -e POSTGRES_PASSWORD=nooptime postgres
 ```
 
 Second, run Nooptime:
