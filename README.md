@@ -27,5 +27,5 @@ docker run -d -p 5432:5432 --name nooptime-postgres -e POSTGRES_USERNAME=nooptim
 Second, run Nooptime:
 
 ```
-cd .\src\Nooptime.Web\;dotnet run
+pushd .\src\Nooptime.Web\;dotnet run;popd
 ```
