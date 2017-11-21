@@ -1,5 +1,5 @@
 ## Introduction
-Nooptime (a terrible pun on Uptime) is an ASP.NET Core uptime monitor that runs in Docker and easy to extend via a simple plugin system.
+Nooptime is an ASP.NET Core uptime monitor that runs in Docker and easy to extend via a simple plugin system.
 
 ### Technology
 
@@ -13,4 +13,19 @@ Nooptime (a terrible pun on Uptime) is an ASP.NET Core uptime monitor that runs 
 The following are required to develop NoopTime:
 
 - Docker for Windows, or Docker for Mac OS X. This is for Postgres
-- Some kind of IDE (VS2017 Community Edition is used)
+- Some kind of IDE (VS2017 Community Edition or Visual Studio Code)
+- NodeJS, used for `browserify'ing` the Vue.JS views.
+
+## Setup
+
+First, run Postgres in a docker container:
+
+```
+docker run -d -p 5432:5432 --name nooptime-postgres -e POSTGRES_USERNAME=nooptime -e POSTGRES_PASSWORD=nooptime postgres
+```
+
+Second, run Nooptime:
+
+```
+cd .\src\Nooptime.Web\;dotnet run
+```
