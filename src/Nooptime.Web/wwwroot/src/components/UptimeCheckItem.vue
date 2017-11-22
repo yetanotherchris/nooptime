@@ -1,19 +1,31 @@
 <template>
-  <li>
-    {{ item.text }}
-    <button @click="$emit('remove', item.id)">
-      X
-    </button>
-  </li>
+  <tr>
+    <td style="width:90%;text-align:left;">{{ item.text }}</td>
+    <td>
+      <a @click="$emit('play', item.id)" href="#">
+        <span class="glyphicon glyphicon-play"></span>
+      </a>
+    </td>
+    <td>
+      <a @click="$emit('edit', item.id)" href="#">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+    </td>
+    <td>
+      <a @click="$emit('remove', item.id)" href="#">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+    </td>
+  </tr>
 </template>
 
 <script>
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true
+  export default {
+    props: {
+      item: {
+        type: Object,
+        required: true
+      }
     }
   }
-}
 </script>

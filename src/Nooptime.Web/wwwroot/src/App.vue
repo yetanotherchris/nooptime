@@ -1,6 +1,5 @@
 <template>
 	<div id="app">
-		<h1>nooptime!</h1>
 		<UptimeCheckList/>
 	</div>
 </template>
