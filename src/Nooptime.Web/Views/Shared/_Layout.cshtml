@@ -2,41 +2,52 @@
 <html>
 
 <head>
-    <title>@ViewData["Title"] - Nooptime</title>
-    <link rel="icon" href="~/favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
+	<title>@ViewData["Title"] - Nooptime</title>
+	<link rel="icon" href="~/favicon.png" type="image/x-icon" />
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1>
-                    <img src="images/nooptime-icon.svg">&nbsp; nooptime
-                </h1>
+	<div class="container">
+		<div class="row">
 
-                <a class="btn btn-primary">New uptime check</a>
+			<div class="col-md-10">
+				<h1>
+					<img src="images/nooptime-icon.svg">&nbsp; nooptime
+				</h1>
+			</div>
+			<div class="col-md-10">
+				<div style="background-color: rgb(72, 81, 90); border-radius: 5px;padding:10px;">
+					<a href="#">Status</a>
+					<a href="#" style="margin-left:10px">Manage</a>
+					<a href="#" style="margin-left:10px">Activity</a>
 
-                <!-- Bootstrap -->
-                <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-                <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+				</div>
+			</div>
+			<div class="col-md-10">
+				&nbsp;
+			</div>
+			<div class="col-md-10">
+				<!-- Bootstrap -->
+				<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+				<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-                <!-- Bootflat's JS files.-->
-                <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
-                <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
-                <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script> @RenderBody()
+				<!-- Bootflat's JS files.-->
+				<script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
+				<script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
+				<script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script> @RenderBody()
 
-                <hr />
-                <footer>
-                    <p>&copy; 2017</p>
-                </footer>
-            </div>
-        </div>
-    </div>
+				<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+				<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> @RenderSection("Scripts", required: false)
+
+				<hr />
+				<footer>
+					<p>&copy; 2017</p>
+				</footer>
+			</div>
+		</div>
+	</div>
 </body>
-
-<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> @RenderSection("Scripts", required: false)
 
 </html>
