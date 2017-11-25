@@ -78,7 +78,7 @@ namespace Nooptime.Web
 			{
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
+					template: "{controller=Home}/{action=Status}/{id?}");
 			});
 
 			app.UseSwaggerUi3(new Type[] { typeof(UptimeCheckController) }, settings =>

@@ -6,6 +6,35 @@
 	<link rel="icon" href="~/favicon.png" type="image/x-icon" />
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
+
+	<style>
+			.container {
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				color: #2c3e50;
+			}
+		
+			.bounce-enter-active {
+				animation: bounce-in 0.5s;
+			}
+		
+			.bounce-leave-active {
+				animation: bounce-in 0.5s reverse;
+			}
+		
+			@@keyframes bounce-in {
+				0% {
+					transform: scale(0);
+				}
+				50% {
+					transform: scale(1.5);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}
+		</style>
+
 </head>
 
 <body>
@@ -14,14 +43,14 @@
 
 			<div class="col-md-10">
 				<h1>
-					<img src="images/nooptime-icon.svg">&nbsp; nooptime
+					<img src="~/images/nooptime-icon.svg">&nbsp; nooptime
 				</h1>
 			</div>
 			<div class="col-md-10">
 				<div style="background-color: rgb(72, 81, 90); border-radius: 5px;padding:10px;">
-					<a href="#">Status</a>
-					<a href="#" style="margin-left:10px">Manage</a>
-					<a href="#" style="margin-left:10px">Activity</a>
+					<a href="~/Home/Status">Status</a>
+					<a href="~/Home/Manage" style="margin-left:10px">Manage</a>
+					<a href="~/Home/Activity" style="margin-left:10px">Activity</a>
 
 				</div>
 			</div>
@@ -41,8 +70,10 @@
 				<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
 				<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> @RenderSection("Scripts", required: false)
 
-				@RenderBody()
+				<script src="~/dist/services.js" asp-append-version="true"></script>
 
+				@RenderBody()
+				
 				<hr />
 				<footer>
 					<p>&copy; 2017</p>

@@ -13,27 +13,28 @@ namespace Nooptime.Web.Controllers
 
 	public class HomeController : Controller
 	{
-		public IActionResult Index()
+		public IActionResult Status()
 		{
 			return View();
 		}
 
-		[HttpPost]
-		public IActionResult Index(MyModel model)
+		public IActionResult Manage()
 		{
-			var stringBuilder = new StringBuilder();
-			foreach (string key in model.Properties.Keys)
-			{
-				stringBuilder.AppendLine($"{key} - {model.Properties[key]}");
-			}
-
-			return Content(stringBuilder.ToString());
+			return View();
 		}
 
+		public IActionResult Activity()
+		{
+			return View();
+		}
 
 		public IActionResult Error()
 		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+			return View(new ErrorViewModel 
+			{ 
+				RequestId = System.Diagnostics.Activity.Current?.Id 
+							?? HttpContext.TraceIdentifier 
+			});
 		}
 	}
 }

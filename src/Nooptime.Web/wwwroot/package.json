@@ -4,13 +4,17 @@
   "author": "Chris S. <chrisasmall+github@gmail.com>",
   "private": true,
   "scripts": {
-    "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
+    "watchify": "watchify -vd -p browserify-hmr -e src/*.js -o dist/build.js",
     "serve": "http-server -o -s -c 1 -a localhost",
     "dev": "npm-run-all --parallel watchify serve",
-    "build": "cross-env NODE_ENV=development browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
+    "build": "npm-run-all --parallel build-activity build-status build-manage",
+    "build-activity": "cross-env NODE_ENV=development browserify -g envify src/activity.vue.js | uglifyjs -c warnings=false -m > dist/activity.vue.min.js",
+    "build-status": "cross-env NODE_ENV=development browserify -g envify src/status.vue.js | uglifyjs -c warnings=false -m > dist/status.vue.min.js",
+    "build-manage": "cross-env NODE_ENV=development browserify -g envify src/manage.vue.js | uglifyjs -c warnings=false -m > dist/manage.vue.min.js"    
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "snapsvg": "^0.5.1",
     "vue": "^2.0.1"
   },
   "devDependencies": {

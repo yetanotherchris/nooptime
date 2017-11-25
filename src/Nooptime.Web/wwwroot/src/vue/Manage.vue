@@ -26,12 +26,6 @@ export default {
 	components: {
 		UptimeCheckList,
 		AddEditForm
-	},
-	props: {
-		show: {
-			type: Boolean,
-			required: true
-		}
 	}
 };
 </script>
