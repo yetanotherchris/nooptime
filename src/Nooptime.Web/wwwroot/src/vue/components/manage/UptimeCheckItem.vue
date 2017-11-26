@@ -2,7 +2,7 @@
   <tr>
     <td style="width:90%;text-align:left;">{{ item.text }}</td>
     <td>
-      <a @click="$emit('play', item.id)" href="#">
+      <a @click="$emit('run', item.id)" href="#">
         <span class="glyphicon glyphicon-play"></span>
       </a>
     </td>
