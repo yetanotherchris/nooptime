@@ -1,5 +1,3 @@
-//import UptimeCheckService from './UptimeCheckService.js';
-
 class RestUptimeCheckService {
     
     constructor(endPointPath) {
@@ -20,7 +18,7 @@ class RestUptimeCheckService {
     }
 }
 
-var tempAxios = require("axios");
+/* var tempAxios = require("axios");
 tempAxios.default.post("/api/UptimeCheck/Post", {
     Name :"test item",
     Description : "test description",
@@ -29,4 +27,4 @@ tempAxios.default.post("/api/UptimeCheck/Post", {
 
 var x = new RestUptimeCheckService("foo");
 var data = x.getSummaryData();
-console.log(data);
+console.log(data); */
