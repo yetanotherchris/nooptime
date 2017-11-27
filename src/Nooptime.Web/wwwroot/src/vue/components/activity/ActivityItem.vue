@@ -1,18 +1,8 @@
 <template>
-  <tr>
-    <td style="width:40%;">
-      {{ item.text }}
-    </td>
-    <td>
-      {{ item.checkType }}
-    </td>
-    <td>
-      {{ item.uptime }} %
-    </td>
-    <td style="width:40%">
-      <svg v-bind:id="'svg' + item.id" style="width:400px;height:20px;"></svg>      
-    </td>
-  </tr>
+  <li style="list-style:none;">
+    <svg v-bind:id="'svg-' +item.id" style="width:12px;height:12px" />
+    <strong>{{ item.name }}</strong>&nbsp;{{ (item.success === true ? "was sucessful." : "failed (" +item.errorMessage+ ")")}}
+  </li>
 </template>
 
 <script>
@@ -23,23 +13,20 @@ export default {
       required: true
     }
   },
-  mounted: function() 
-  {
+  mounted: function() {
     const Snap = require("snapsvg");
-    var snap = Snap("#svg" +this.item.id);
-    var radius = 6;
+    var snap = Snap("#svg-" + this.item.id);
+    var radius = 3;
+    var circle = snap.circle(6,6, radius);
+    var color = "#CC0000";
 
-    for (var i = 1; i < this.item.checks.length; i++) {
-      var offsetLeft = i * (radius * 2);
-      var circle = snap.circle(50 + offsetLeft, 10, radius);
-
-      var color = "#bada55";
-      if (this.item.checks[i] == 0) var color = "#CC0000";
-
-      circle.attr({
-        fill: color
-      });
+    if (this.item.success === true) {
+      color = "#bada55";
     }
+
+    circle.attr({
+      fill: color
+    });
   }
 };
 </script>

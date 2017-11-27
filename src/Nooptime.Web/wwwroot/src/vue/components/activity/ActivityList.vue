@@ -1,16 +1,14 @@
 <template>
   <div>
-    <table class="table table-striped" v-if="items.length">
-      <tbody>
-        <ActivityItem 
-          v-for="item in items" 
-          :key="item.id"
-          :item="item" 
-           />
-      </tbody>
-    </table>
+    <ul v-if="items.length">
+      <ActivityItem 
+        v-for="item in items" 
+        :key="item.id"
+        :item="item" 
+          />
+    </ul>
     <p v-else>
-      Nothing here.
+      No statuses.
     </p>
   </div>
 </template>
@@ -27,39 +25,21 @@
         items: [
           {
             id: 1,
-            text: "Check google.com",
-            checkType : "HTTP",
-            uptime: 99,
-            checks: [ 
-              1,1,1,1,1,1,
-              1,1,1,1,1,1,
-              1,1,1,1,1,1,
-              1,1,1,1,0,1
-            ]
+            name: "Check google.com",
+            success : true,
+            errorMessage : ""            
           },
           {
             id: 2,
-            text: "Check the database",
-            checkType : "SQL",
-            uptime: 82,
-            checks: [ 
-              1,1,1,0,1,1,
-              0,1,1,1,1,1,
-              1,0,1,0,1,1,
-              1,1,1,1,0,1
-            ]
+            name: "Check the database",
+            success : false,
+            errorMessage : "connection timeout"
           },
           {
             id: 3,
-            text: "Ping a Windows 2003 server",
-            checkType: "Ping",
-            uptime: 95,
-            checks: [ 
-              1,1,1,1,1,1,
-              1,0,1,0,1,1,
-              1,1,1,1,1,1,
-              1,0,1,1,1,1
-            ]
+            name: "Ping a Windows 2003 server",
+            success : true,
+            errorMessage : " was successful"
           }
         ]
       };

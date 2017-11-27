@@ -4,4 +4,4 @@ import StatusApp from './vue/Status.vue'
 new Vue({
   el: '#status',
   render: h => h(StatusApp)
-})
+});
