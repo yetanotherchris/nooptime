@@ -4,8 +4,9 @@
 <head>
 	<title>@ViewData["Title"] - Nooptime</title>
 	<link rel="icon" href="~/favicon.png" type="image/x-icon" />
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
+	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 
 	<style>
 			.container {
@@ -39,15 +40,27 @@
 
 <body>
 	<div class="container">
+			<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-sm">
+				<div class="modal-content">
+				  <form>
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter email">
+						<small id="emailHelp" class="form-text text-muted">The name of the check.</small>
+					</div>
+					</form>
+				</div>
+			  </div>
+			</div>
 		<div class="row">
-
 			<div class="col-md-10">
 				<h1>
 					<img src="~/images/nooptime-icon.svg">&nbsp; nooptime
 				</h1>
 			</div>
 			<div class="col-md-10">
-				<nav style="background-color: rgb(72, 81, 90); border-radius: 5px;padding:10px; font-size:12px;">
+				<nav style="background-color: rgb(72, 81, 90); border-radius: 5px;padding:10px; font-size:14px;">
 					<a href="~/Home/Status" id="navitem-status">Status</a>
 					<a href="~/Home/Manage" id="navitem-manage" style="margin-left:10px">Manage</a>
 					<a href="~/Home/Activity" id="navitem-activity" style="margin-left:10px">Activity</a>
@@ -58,16 +71,14 @@
 			</div>
 			<div class="col-md-10">
 				<!-- Bootstrap -->
-				<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-				<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+				<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
 				<!-- Bootflat's JS files.-->
 				<script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
 				<script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
 				<script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script> @RenderBody()
-
-				<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
-				<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> @RenderSection("Scripts", required: false)
 
 				<script src="~/dist/services.js" asp-append-version="true"></script>
 
@@ -81,5 +92,4 @@
 		</div>
 	</div>
 </body>
-
 </html>

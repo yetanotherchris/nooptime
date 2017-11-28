@@ -4,7 +4,7 @@
   "author": "Chris S. <chrisasmall+github@gmail.com>",
   "private": true,
   "scripts": {
-    "watchify": "watchify -vd -p browserify-hmr -e src/*.js -o dist/build.js",
+    "watch": "watchify -vd -p browserify-hmr -e src/*.js -o dist/build.js",
     "serve": "http-server -o -s -c 1 -a localhost",
     "dev": "npm-run-all --parallel watchify serve",
     "build": "npm-run-all --parallel build-activity build-status build-manage",

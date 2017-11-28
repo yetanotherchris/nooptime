@@ -1,31 +1,44 @@
 <template>
-  <div class="well">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">Contact</h4>
-        </div>
-        <div class="modal-body">
-          <p>Feel free to contact us for any issues you might have with our products.</p>
-          <div class="row">
-            <div class="col-xs-6">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="Name">
+	<div id="add-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-size: 1.25rem; margin-top:0px;margin-bottom:0px;">New status check</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                            <small id="emailHelp" class="form-text text-muted">The name of the check.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type" class="form-control">
+                                <option value="HTTP">HTTP</option>
+                                <option value="SQL">SQL</option>
+                                <option value="ping">Ping</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="interval">Interval</label>
+                            <input type="text" class="form-control" id="interval" placeholder="e.g. 1 minute 30 seconds">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" checked>Enabled
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="col-xs-6">
-              <label>Email</label>
-              <input type="text" class="form-control" placeholder="Email">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <label>Message</label>
-              <textarea class="form-control" rows="3">Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac</textarea>
-            </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Send</button>
-        </div>
-  </div>
+    </div>
 </template>
