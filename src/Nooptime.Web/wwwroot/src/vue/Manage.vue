@@ -24,7 +24,7 @@ import AddEditForm from "./components/manage/AddEditForm.vue";
 
 export default {
 	components: {
-		UptimeCheckList, AddEditForm
+		ManageList, AddEditForm
 	}
 };
 </script>
