@@ -2,7 +2,7 @@
   <div>
     <table class="table table-striped" v-if="items.length">
       <tbody>
-        <UptimeCheckItem 
+        <ManageItem 
           v-for="item in items" 
           :key="item.id" 
           :item="item" 
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-  import UptimeCheckItem from "./UptimeCheckItem.vue";
+  import ManageItem from "./ManageItem.vue";
 
   export default {
     components: {
-      UptimeCheckItem
+      ManageItem
     },
     data() {
       return {

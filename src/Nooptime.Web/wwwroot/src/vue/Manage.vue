@@ -10,7 +10,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">			
-				<UptimeCheckList/>
+				<ManageList/>
 			</div>
 		</div>
 		<AddEditForm />
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import UptimeCheckList from "./components/manage/UptimeCheckList.vue";
+import ManageList from "./components/manage/ManageList.vue";
 import AddEditForm from "./components/manage/AddEditForm.vue";
 
 
