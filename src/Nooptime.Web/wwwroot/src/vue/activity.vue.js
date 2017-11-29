@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ActivityApp from './vue/Activity.vue'
+import ActivityApp from './views/Activity.vue'
 
 new Vue({
   el: '#activity',

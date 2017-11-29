@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ManageApp from './vue/Manage.vue'
+import ManageApp from './views/Manage.vue'
 
 new Vue({
   el: '#manage',

@@ -1,4 +1,4 @@
-class RestUptimeCheckService {
+class UptimeCheckService {
     
     constructor(endPointPath) {
         this.endpointPath = endPointPath;
@@ -24,7 +24,7 @@ tempAxios.default.post("/api/UptimeCheck/Post", {
     Description : "test description",
     Interval : "0"
 });
-
+*/
 var x = new RestUptimeCheckService("foo");
 var data = x.getSummaryData();
-console.log(data); */
+console.log(data); 

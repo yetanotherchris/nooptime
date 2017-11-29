@@ -87,7 +87,9 @@ namespace Nooptime.Web
 				 {
 					 DefaultPropertyNameHandling = PropertyNameHandling.CamelCase,
 					 SwaggerUiRoute = "/swagger",
-					 DefaultUrlTemplate = "{controller}/{action}/{id?}"
+					 DefaultUrlTemplate = "{controller}/{action}/{id?}",
+					 Title = "Nooptime API",
+					 Description = "The RESTful API for Nooptime"
 				 };
 			 });
 		}
