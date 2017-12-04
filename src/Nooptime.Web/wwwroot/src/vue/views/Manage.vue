@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import ManageList from "./components/manage/ManageList.vue";
-import AddEditForm from "./components/manage/AddEditForm.vue";
+import ManageList from "../components/manage/ManageList.vue";
+import AddEditForm from "../components/manage/AddEditForm.vue";
 
 
 export default {

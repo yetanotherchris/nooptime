@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ActivityList from "./components/activity/ActivityList.vue";
+import ActivityList from "../components/activity/ActivityList.vue";
 
 export default {
 	components: {

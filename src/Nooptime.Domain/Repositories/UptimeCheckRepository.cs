@@ -90,10 +90,11 @@ namespace Nooptime.Domain.Repositories
 
         public string TestConnection()
         {
+            string connectionString = _databaseConfiguration.ConnectionString;
+            connectionString += ";Timeout=3";
+
             try
             {
-                string connectionString = _databaseConfiguration.ConnectionString;
-                connectionString += ";Timeout=3";
 
                 using (Npgsql.NpgsqlConnection connection = new Npgsql.NpgsqlConnection(connectionString))
                 {
@@ -104,7 +105,7 @@ namespace Nooptime.Domain.Repositories
             }
             catch (Exception ex)
             {
-                return $"Failure: {ex.Message}";
+                return $"Failure: {ex.Message} - "+connectionString;
             }
         }
     }

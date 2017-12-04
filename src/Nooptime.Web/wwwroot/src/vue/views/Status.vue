@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import StatusList from "./components/status/StatusList.vue";
+import StatusList from "../components/status/StatusList.vue";
 
 export default {
 	components: {

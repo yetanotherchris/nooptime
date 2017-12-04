@@ -18,13 +18,19 @@ The following are required to develop NoopTime:
 
 ## Setup
 
-First, run Postgres in a docker container:
+Docker compose is used for easier development (specifically, linked containers 
+for a custom network). Install docker-compose and run `docker-compose up` in the 
+web folder.
+
+Alternatively you can do it outside of Docker-land, or at least the Nooptime part.
+
+##### 1. Run Postgres in a docker container:
 
 ```
 docker run -d -p 5432:5432 --name nooptime-postgres -e POSTGRES_USER=nooptime -e POSTGRES_PASSWORD=nooptime postgres
 ```
 
-Second, run Nooptime:
+##### 2. Run Nooptime:
 
 ```
 pushd .\src\Nooptime.Web\;
