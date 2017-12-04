@@ -1,76 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Marten;
-using Marten.Util;
 using Nooptime.Domain.Models;
 
 namespace Nooptime.Domain.Repositories
 {
-	public class UptimeCheckRepository : IUptimeCheckRepository
-	{
-		private readonly IDocumentStore _store;
+    public class UptimeCheckRepository : IUptimeCheckRepository
+    {
+        public IDocumentStore _documentStore;
 
-		public UptimeCheckRepository(IDocumentStore store)
-		{
-			_store = store;
-		}
+        public IDocumentStore DocumentStore
+        {
+            get
+            {
+                if (_documentStore == null)
+                {
+                    _documentStore = _documentStoreFactory.Create();
+                }
 
-		public async Task<IEnumerable<UptimeCheckData>> List()
-		{
-			using (IDocumentSession session = _store.LightweightSession())
-			{
-				return await session.Query<UptimeCheckData>().ToListAsync();
-			}
-		}
+                return _documentStore;
+            }
+        }
 
-		public async Task<UptimeCheckData> Load(Guid id)
-		{
-			using (IDocumentSession session = _store.LightweightSession())
-			{
-				return await session.Query<UptimeCheckData>().FirstOrDefaultAsync(x => x.Id == id);
-			}
-		}
+        private readonly DatabaseConfiguration _databaseConfiguration;
+        private readonly DocumentStoreFactory _documentStoreFactory;
 
-		public void Insert(UptimeCheckData uptimeCheckData)
-		{
-			using (IDocumentSession session = _store.LightweightSession())
-			{
-				session.Insert(uptimeCheckData);
-				session.SaveChanges();
-			}
-		}
+        public UptimeCheckRepository(DocumentStoreFactory documentStoreFactory, DatabaseConfiguration databaseConfiguration)
+        {
+            _documentStoreFactory = documentStoreFactory;
+            _databaseConfiguration = databaseConfiguration;
+        }
 
-		public void Update(UptimeCheckData uptimeCheckData)
-		{
-			using (IDocumentSession session = _store.LightweightSession())
-			{
-				session.Update(uptimeCheckData);
-				session.SaveChanges();
-			}
-		}
+        public async Task<IEnumerable<UptimeCheckData>> List()
+        {
+            using (IDocumentSession session = DocumentStore.LightweightSession())
+            {
+                return await session.Query<UptimeCheckData>().ToListAsync();
+            }
+        }
 
-		public async Task Delete(Guid id)
-		{
-			var item = await Load(id);
-			if (item != null)
-			{
-				using (IDocumentSession session = _store.LightweightSession())
-				{
-					session.Delete(item);
-					session.SaveChanges();
-				}
-			}
-		}
+        public async Task<UptimeCheckData> Load(Guid id)
+        {
+            using (IDocumentSession session = DocumentStore.LightweightSession())
+            {
+                return await session.Query<UptimeCheckData>().FirstOrDefaultAsync(x => x.Id == id);
+            }
+        }
 
-		internal void ClearDatabase()
-		{
-			using (IDocumentSession session = _store.LightweightSession())
-			{
-				session.DeleteWhere<UptimeCheckData>(x => true);
-				session.SaveChanges();
-			}
-		}
-	}
+        public void Insert(UptimeCheckData uptimeCheckData)
+        {
+            using (IDocumentSession session = DocumentStore.LightweightSession())
+            {
+                session.Insert(uptimeCheckData);
+                session.SaveChanges();
+            }
+        }
+
+        public void Update(UptimeCheckData uptimeCheckData)
+        {
+            using (IDocumentSession session = DocumentStore.LightweightSession())
+            {
+                session.Update(uptimeCheckData);
+                session.SaveChanges();
+            }
+        }
+
+        public async Task Delete(Guid id)
+        {
+            var item = await Load(id);
+            if (item != null)
+            {
+                using (IDocumentSession session = DocumentStore.LightweightSession())
+                {
+                    session.Delete(item);
+                    session.SaveChanges();
+                }
+            }
+        }
+
+        internal void ClearDatabase()
+        {
+            using (IDocumentSession session = DocumentStore.LightweightSession())
+            {
+                session.DeleteWhere<UptimeCheckData>(x => true);
+                session.SaveChanges();
+            }
+        }
+
+        public string TestConnection()
+        {
+            try
+            {
+                string connectionString = _databaseConfiguration.ConnectionString;
+                connectionString += ";Timeout=3";
+
+                using (Npgsql.NpgsqlConnection connection = new Npgsql.NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+                }
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return $"Failure: {ex.Message}";
+            }
+        }
+    }
 }

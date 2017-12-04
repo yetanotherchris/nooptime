@@ -1,97 +1,85 @@
 ﻿using System;
-using System.Reflection;
-using Marten;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema;
-using Nooptime.Domain.Models;
 using Nooptime.Domain.Repositories;
 using Nooptime.Domain.Services;
 using Nooptime.Web.Controllers;
 using NSwag.AspNetCore;
+using Nooptime.Domain;
 
 namespace Nooptime.Web
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
 
-		public IConfiguration Configuration { get; }
+            Configuration = builder.Build();
+        }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMvc();
-			services.AddScoped<IUptimeCheckRepository, UptimeCheckRepository>();
-			services.AddScoped<IUptimeCheckService, UptimeCheckService>();
-			services.AddScoped<IDocumentStore>(provider => CreateDocumentStore());
-		}
+        public IConfiguration Configuration { get; }
 
-		private IDocumentStore CreateDocumentStore()
-		{
-			const string ConnectionString = "database=nooptime;server=localhost;port=5432;uid=nooptime;pwd=nooptime;";
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+            services.AddOptions();
 
-			var documentStore = DocumentStore.For(options =>
-				{
-					options.CreateDatabasesForTenants(c =>
-					{
-						c.MaintenanceDatabase(ConnectionString);
-						c.ForTenant()
-							.CheckAgainstPgDatabase()
-							.WithOwner("nooptime")
-							.WithEncoding("UTF-8")
-							.ConnectionLimit(-1)
-							.OnDatabaseCreated(_ =>
-							{
-								Console.WriteLine("Database created");
-							});
-					});
+            var databaseConfig = new DatabaseConfiguration();
+            Configuration.GetSection("Database").Bind(databaseConfig);
+            services.AddSingleton<DatabaseConfiguration>(databaseConfig);
 
-					options.Connection(ConnectionString);
-					options.Schema.For<UptimeCheckData>().Index(x => x.Id);
-				});
+            services.AddScoped<IUptimeCheckRepository, UptimeCheckRepository>();
+            services.AddScoped<IUptimeCheckService, UptimeCheckService>();
+            services.AddSingleton<DocumentStoreFactory>();
+            services.AddScoped<CanaryService>();
+        }
 
-			return documentStore;
-		}
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				app.UseBrowserLink();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-			}
+            app.UseStaticFiles();
 
-			app.UseStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "status",
+                    template: "{controller=Home}/{action=Status}/{id?}");
 
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Status}/{id?}");
-			});
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
-			app.UseSwaggerUi3(new Type[] { typeof(UptimeCheckController) }, settings =>
-			 {
-				 new SwaggerUi3Settings()
-				 {
-					 DefaultPropertyNameHandling = PropertyNameHandling.CamelCase,
-					 SwaggerUiRoute = "/swagger",
-					 DefaultUrlTemplate = "{controller}/{action}/{id?}",
-					 Title = "Nooptime API",
-					 Description = "The RESTful API for Nooptime"
-				 };
-			 });
-		}
-	}
+            app.UseSwaggerUi3(new Type[] { typeof(UptimeCheckController) }, settings =>
+             {
+                 new SwaggerUi3Settings()
+                 {
+                     DefaultPropertyNameHandling = PropertyNameHandling.CamelCase,
+                     SwaggerUiRoute = "/swagger",
+                     DefaultUrlTemplate = "{controller}/{action}/{id?}",
+                     Title = "Nooptime API",
+                     Description = "The RESTful API for Nooptime"
+                 };
+             });
+        }
+    }
 }

@@ -17,5 +17,7 @@ namespace Nooptime.Domain.Repositories
 		void Update(UptimeCheckData uptimeCheckData);
 
 		Task Delete(Guid id);
+
+		string TestConnection();
 	}
 }
