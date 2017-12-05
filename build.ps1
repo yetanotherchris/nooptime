@@ -1,6 +1,7 @@
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'));
-
-choco install nodejs
+if ((Get-Command "npm" -ErrorAction SilentlyContinue) -eq $null) 
+{ 
+   Write-Host "Unable to find npm in your path. Install NodeJS first."
+}
 
 ###############################################################################
 # NPM build (for VueJS)
