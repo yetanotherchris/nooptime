@@ -1,16 +1,16 @@
 <template>
   <tr>
-    <td style="width:40%;">
+    <td style="width:40%">
       {{ item.text }}
     </td>
-    <td>
+    <td style="width:10%;text-align:middle">
       {{ item.checkType }}
     </td>
-    <td>
+    <td style="width:10%;text-align:middle">
       {{ item.uptime }} %
     </td>
-    <td style="width:40%">
-      <svg v-bind:id="'svg-' + item.id" style="width:400px;height:20px;" />     
+    <td style="width:40%;text-align:left">
+      <svg v-bind:id="'svg-' + item.id" style="width:400px;margin-left:-30px;height:20px;" />     
     </td>
   </tr>
 </template>
