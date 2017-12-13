@@ -1,3 +1,9 @@
+if ((Get-Command "npm" -ErrorAction SilentlyContinue) -eq $null) 
+{ 
+   Write-Host "Unable to find npm in your path. Install NodeJS first."
+   exit 1
+}
+
 ###############################################################################
 # NPM build (for VueJS)
 ###############################################################################
