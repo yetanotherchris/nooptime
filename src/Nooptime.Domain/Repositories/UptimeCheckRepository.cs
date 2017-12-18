@@ -105,7 +105,7 @@ namespace Nooptime.Domain.Repositories
             }
             catch (Exception ex)
             {
-                return $"Failure: {ex.Message} - "+connectionString;
+                return $"Failure: {ex.Message}";
             }
         }
     }

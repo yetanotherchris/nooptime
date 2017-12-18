@@ -9,31 +9,33 @@
 	<link href="/css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 
 	<style>
-			.container {
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				color: #2c3e50;
+		table { font-size:12px; }
+
+		.container {
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			color: #2c3e50;
+		}
+	
+		.bounce-enter-active {
+			animation: bounce-in 0.5s;
+		}
+	
+		.bounce-leave-active {
+			animation: bounce-in 0.5s reverse;
+		}
+	
+		@@keyframes bounce-in {
+			0% {
+				transform: scale(0);
 			}
-		
-			.bounce-enter-active {
-				animation: bounce-in 0.5s;
+			50% {
+				transform: scale(1.5);
 			}
-		
-			.bounce-leave-active {
-				animation: bounce-in 0.5s reverse;
+			100% {
+				transform: scale(1);
 			}
-		
-			@@keyframes bounce-in {
-				0% {
-					transform: scale(0);
-				}
-				50% {
-					transform: scale(1.5);
-				}
-				100% {
-					transform: scale(1);
-				}
-			}
+		}
 		</style>
 
 </head>
@@ -54,22 +56,22 @@
 			  </div>
 			</div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<h1>
 					<img src="~/images/nooptime-icon.svg">&nbsp; nooptime
 				</h1>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<nav style="background-color: rgb(72, 81, 90); border-radius: 5px;padding:10px; font-size:14px;">
 					<a href="~/Home/Status" id="navitem-status">Status</a>
 					<a href="~/Home/Manage" id="navitem-manage" style="margin-left:10px">Manage</a>
 					<a href="~/Home/Activity" id="navitem-activity" style="margin-left:10px">Activity</a>
 				</nav>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 				&nbsp;
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<!-- Bootstrap -->
 				<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
