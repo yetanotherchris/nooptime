@@ -6,8 +6,8 @@ services:
     ports:
       - 5000:5000
     environment:
-      - ENV ASPNETCORE_ENVIRONMENT="Production"
-      - ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
+      - ASPNETCORE_ENVIRONMENT="Production"
+      - ASPNETCORE_URLS="http://0.0.0.0:5000"
       - Database:ConnectionString="server=postgres;port=5432;database=nooptime;uid=nooptime;pwd=nooptime;"
     depends_on:
       - postgres
