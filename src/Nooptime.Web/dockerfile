@@ -14,4 +14,4 @@ ENV ASPNETCORE_ENVIRONMENT="Production"
 ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
 
 # Postgres database connection string
-ENV Database.ConnectionString=""
+ENV Database:ConnectionString=""
