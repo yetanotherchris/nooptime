@@ -13,7 +13,7 @@
     "build-manage": "cross-env NODE_ENV=development browserify -g envify src/vue/manage.vue.js | uglifyjs -c warnings=false -m > dist/manage.vue.min.js"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.19.0",
     "snapsvg": "^0.5.1",
     "vue": "^2.0.1"
   },
