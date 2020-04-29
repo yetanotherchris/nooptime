@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Marten;
+using Nooptime.Domain;
 using Nooptime.Domain.Models;
 using Nooptime.Domain.Repositories;
 using Nooptime.Tests.Helpers;

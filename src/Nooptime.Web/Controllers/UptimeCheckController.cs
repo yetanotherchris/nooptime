@@ -8,9 +8,10 @@ using Nooptime.Web.Models;
 
 namespace Nooptime.Web.Controllers
 {
+	[ApiController]
 	[Produces("application/json")]
 	[Route("api/UptimeCheck")]
-	public class UptimeCheckController : Controller
+	public class UptimeCheckController : ControllerBase
 	{
 		private readonly IUptimeCheckService _uptimeCheckService;
 

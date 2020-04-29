@@ -8,7 +8,7 @@ namespace Nooptime.Domain.Repositories
 {
     public class UptimeCheckRepository : IUptimeCheckRepository
     {
-        public IDocumentStore _documentStore;
+        private IDocumentStore _documentStore;
 
         public IDocumentStore DocumentStore
         {
@@ -26,6 +26,11 @@ namespace Nooptime.Domain.Repositories
         private readonly DatabaseConfiguration _databaseConfiguration;
         private readonly DocumentStoreFactory _documentStoreFactory;
 
+        internal UptimeCheckRepository(DocumentStore documentStore)
+        {
+            _documentStore = documentStore;
+        }
+        
         public UptimeCheckRepository(DocumentStoreFactory documentStoreFactory, DatabaseConfiguration databaseConfiguration)
         {
             _documentStoreFactory = documentStoreFactory;

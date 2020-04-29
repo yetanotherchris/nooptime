@@ -30,7 +30,6 @@ namespace Nooptime.Tests.Unit.Web.Controllers
 
 			var data = new UptimeCheckData()
 			{
-				Id = Guid.Empty,
 				Name = "Nom",
 				Description = "Nomnom",
 				Interval = TimeSpan.FromHours(1),
@@ -39,21 +38,20 @@ namespace Nooptime.Tests.Unit.Web.Controllers
 
 			var model = new UptimeCheckDataModel()
 			{
-				Id = data.Id,
 				Name = data.Name,
 				Description = data.Description,
 				Interval = data.Interval,
 				//Properties = data.Properties
 			};
 
-			_checkServiceMock.Setup(x => x.Create(data)).Returns(expectedId);
+			_checkServiceMock.Setup(x => x.Create(It.IsAny<UptimeCheckData>())).Returns(expectedId);
 
 			// when
 			var actualId = _controller.Post(model);
 
 			// then
 			Assert.Equal(expectedId, actualId);
-			_checkServiceMock.Verify(x => x.Create(data));
+			_checkServiceMock.Verify(x => x.Create(It.Is<UptimeCheckData>(d => d.Name == data.Name)));
 		}
 
 		[Fact]
