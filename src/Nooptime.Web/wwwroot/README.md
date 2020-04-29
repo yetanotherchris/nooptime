@@ -22,5 +22,6 @@ For more information see the [docs for vueify](https://github.com/vuejs/vueify).
 Use the RestUptimeCheckService.js file for testing, then run this for updates:
 
 ```
-browserify .\js\RestUptimeCheckService.js -o .\dist\out.js
+npm install browserify -g
+browserify .\src\UptimeCheckService.js -o .\dist\out.js
 ```
