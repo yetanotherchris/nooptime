@@ -3,10 +3,10 @@ Nooptime is an ASP.NET Core uptime monitor that runs in Docker and easy to exten
 
 ### Technology
 
-- ASP.NET Core MVC 2.0
+- ASP.NET Core MVC 3.0
 - Postgres 9+ (using Marten as a NoSQL datastore)
 - Docker for Linux (maybe Windows later)
-- Front end technology TBD.
+- VueJS.
 
 ## Developing from the source
 
