@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp8.0</TargetFramework>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Marten" Version="3.11.0" />
+    <PackageReference Include="Marten" Version="7.26.1" />
   </ItemGroup>
 
 </Project>

@@ -48,12 +48,6 @@ namespace Nooptime.Web
             services.AddScoped<IUptimeCheckService, UptimeCheckService>();
             services.AddSingleton<DocumentStoreFactory>();
             services.AddScoped<CanaryService>();
-
-            services.AddOpenApiDocument(document =>
-            {
-                document.Description = "Hello world!";
-                document.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,11 +73,7 @@ namespace Nooptime.Web
             app.UseStaticFiles();
             
             app.UseOpenApi();
-            app.UseSwaggerUi3();
-            app.UseApiverse(settings =>
-            {
-                settings.ApiverseUrl = "https://localhost:5001";
-            });
+            app.UseSwaggerUi();
         }
     }
 }
